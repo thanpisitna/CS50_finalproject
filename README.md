@@ -1,7 +1,6 @@
-# CS50_finalproject
-finalproject
 # CS50_FINAL_PROJECT
 Project
+*source_file* :https://github.com/thanpisitna/CS50_finalproject.git
 # maxwell drug cupboard management system
 #### Video Demo:  <https://youtu.be/7iLOD17oCFw>
 #### Description:this web application is drug cupboard management sysyem 

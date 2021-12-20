@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>การจัดการยา</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/all.css">
+        <link rel="stylesheet" href="/stylesheets/style.css">
+        <link rel="stylesheet" href="/stylesheets/navba.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        </head>
+
+        <body class="adminbody">
+
+            <%- include Navbar%>
+            
+            <%- include menubar%>
+
+            <div class="content-page">
+
+                <!-- Start content -->
+                <div class="content">
+    
+                    <div class="container-fluid">
+    
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="breadcrumb-holder">
+                                    <h1 class="main-title float-left">การจัดการตู้ยา</h1>
+                                    <ol class="breadcrumb float-right">
+                                        <li class="breadcrumb-item">หน้าเเรก </li>
+                                        <li class="breadcrumb-item active">การจัดการตู้ยา</li>
+                                    </ol>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        
+                        <% if (messages.error) { %>
+                            <div class="alert alert-danger" role="alert"><%= messages.error %></div>
+                        <% } %>
+                        
+                        <% if (messages.success) { %>
+                            <div class="alert alert-success" role="alert"><%= messages.success %></div>
+                        <% } %>
+    
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <span class="pull-right">
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal"  data-target="#modal_add_user">
+                                                <i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;&nbsp;เพิ่มตู้ยา</button>
+                                        </span>
+                                        <!--เพิ่มตู้ยา-->
+                                        <div class="modal fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="modal_add_user" aria-hidden="true" id="modal_add_user">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="tab-content">
+                                                        <!--เพิ่มตู้ยา-->
+                                                       
+                                                                <!-- <div  id='modalone'> -->
+                                                                     <!-- เพิ่มตู้ยา -->
+                                                                 <form action="/cupboard/add" method="post" id='modalone' onsubmit="addpara();">
+                
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">เพิ่มตู้ยา</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                            <span class="sr-only">ปิด</span>
+                                                                        </button>
+                                                                    </div>
+                                                                
+                                                                    <div class="modal-body">
+
+                                                                        <!--elemen input-->
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+                                                                                <div class="form-group">
+                                                                                    <label>รหัส</label>
+                                                                                    <input id="sCupid"class="form-control" name="cupid" type="text" required />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+                                                                                <div class="form-group">
+                                                                                    <label>ชื่อ</label>
+                                                                                    <input class="form-control" name="cupName" type="text" required />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+                                                                                <div class="form-group">
+                                                                                    <label>ที่อยู่</label>
+                                                                                    <input class="form-control" name="cuplocation" type="text" required />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+                                                                                <div class="form-group">
+                                                                                    <label>จำนวนสล็อตยา</label>
+                                                                                    <input id="num_slot" class="form-control" name="numslot" type="text" required />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>            
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" onclick="getnumSlot()" class="btn btn-primary" >เพิ่มตู้ยา</button>
+                                                                    </div>
+                
+                                                                
+                                                            <!-- </div> -->
+                                                        </form>
+                                                                <!-- เพิ่มสล็อตยา -->
+                                                                <!-- <div  id='modaltwo'> -->
+                                                        <form action="/cupboard/addSlot" method="post">
+                                                                    <div class="modal" id="modaltwo" >
+                
+                                                                    <div class="modal-header">
+                                                                        <h5 id="haedSlot" class="modal-title">เพิ่มสล็อตยา</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                            <span class="sr-only">ปิด</span>
+                                                                        </button>
+                                                                    </div>
+                                                                
+                                                                    <div class="modal-body">
+
+                                                                        
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+                                                                            
+                                                                                <div id="inputSlot" class="form-group">
+                                                                                    <!-- <label>ลำดับสล็อต</label>
+                                                                                    <label></label>
+                                                                                    <label>รหัสยา</label>
+                                                                                    <input name="drugid" type="text" size="4" required />
+                                                                                    <label>จำนวนยา</label>
+                                                                                    <input  name="cupid" type="text" size="5" required /> -->
+                                                                                </div>
+                                                                          
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" onclick="alertSlot()" class="btn btn-primary" >ตกลง</button>
+                                                                    </div>
+                
+                                                            </div>
+                                                            
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <h3><i class="fa fa-medkit"></i> รายการตู้ยาทั้งหมด</h3>
+                                    </div>
+                                    <!-- end card-header -->
+                                    
+                                    <div class="card-body">
+                                        <% if(data.length) { %>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope = "col" style="width:15%;text-align: center;">ลำดับ</th>
+                                                        <th scope = "col" style="width:15%;text-align: center;">รหัส</th>
+                                                        <th scope = "col" style="width:15%;text-align: center;">ชื่อ</th>
+                                                        <th scope = "col" style="width:15%;text-align: center;">ที่อยู่</th>
+                                                        <th scope = "col" style="width:15%;text-align: center;">การเเจ้งเตือน</th>
+                                                        <th width = "col" style="width:15%;text-align: center;">การจัดการ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for(let i = 0; i < data.length; i++) { %>
+                                                       
+                                                            <tr>
+
+                                                                <th scope="row" style="width:15%;text-align: center;"><%= i+1 %></th>
+                                                                <td style="width:15%;text-align: center;"><%= data[i].cupid %></td>
+                                                                <td style="width:15%;text-align: center;"><%= data[i].cupName %></td>
+                                                                <td style="width:15%;text-align: center;"><%= data[i].cuplocation %></td>
+                                                                <td style="width:15%;text-align: center;"> 
+                                                                    
+                                                                    <%
+                                                                        for(let j = 0; j < dataSlot.length; j++) {
+                                                                            if(dataSlot[j].cupid==data[i].cupid){
+                                                                                if((dataSlot[j].drugnum+dataSlot[j].drugIn)<3){
+                                                                                    
+                                                                    %>    
+                                                                            มียา รหัส (<%= dataSlot[j].drugid%>) เหลือน้อย   
+                                                                               
+                                                                    <%              
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    %>
+                                                               
+                                                                </td>
+                                                              
+                                                                <%  
+                                                                    var CDelete;
+                                                                    
+                                                                    for(let j=0;j<dataSlot.length;j++){
+                                                                        if(dataSlot[j].cupid==data[i].cupid ){
+                                                                            if(dataSlot[j].drugIn>0 || dataSlot[j].drugnum>0){
+                                                                                CDelete=1;
+                                                                            }else{
+                                                                                CDelete=0;
+                                                                            } 
+                                                                        }   
+                                                                    } 
+                                                                %>
+                                                                <td style="width:15%;text-align: center;"> 
+                                                            
+                                                                    <% if(CDelete==0){ %>
+                                                                        <a onclick="r= confirm('คุณต้องการลบตู้ยาใช่หรือไม่?');if(r==true){href='/cupboard/delete/<%= data[i].cupid %>/<%=data[i].numslot %>'}"   class="btn btn-danger delete"> <i class="fa fa-trash"></i></a>
+                                                                    <% }else{%>
+                                                                        <a onclick="alert('ไม่สามารถดำเนินการได้เพราะมียาอยู่ในระบบ')"   class="btn btn-danger delete"> <i class="fa fa-trash"></i></a>
+                                                                    <% }%>   
+                                                                    <a href="/slot/<%= data[i].cupid %>" class="btn btn-info"><i class='far fa-clipboard'></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        </form>
+                                                    <% } %>
+                                                </tbody>
+                                            </table>
+                                        <% } %>
+
+                                            <!-- if result is empty -->
+                                            <% if(!data.length) { %>
+                                                <p class="text-center">ไม่มีรายการตู้ยา!</p>
+                                            <% } %>
+
+                                    </div>
+                                    
+                                </div>
+    
+                            </div>    
+                        </div>
+   
+
+                        
+                    </div>
+  
+                </div>
+
+            </div>
+
+        </body>
+        <script>
+                        
+            function addpara(){
+                alert("เพิ่มตู้ยาเสร็จสิ้น");
+                // $('#modalone').modal('hide');
+                var d = document.getElementById("modalone");
+                d.className += "modal";
+                $("#modaltwo").removeClass("modal");
+            }
+            function getnumSlot(){    
+                let textshow="";
+                let numSlot=$("#num_slot").val();
+                let sCupid=$("#sCupid").val();
+                let sHead=`&nbsp;${sCupid}<input id="slotCup" type="hidden" name="sCupid"  value="${sCupid}" />`
+                    sHead=sHead+`<input id="slotCup" type="hidden" name="sNumSlot"  value="${numSlot}" />&nbsp;`
+                $("#haedSlot").append(sHead);
+                
+                for (i = 0; i < numSlot; i++) {
+                    textshow = textshow + "&nbsp<label>หมายเลขสล็อต</label>&nbsp;";
+                    textshow = textshow + "&nbsp<label>"+(i+1)+"</label>&nbsp;";
+                    textshow = textshow + "&nbsp;<label>รหัสยา</label>&nbsp;";
+                    textshow = textshow + '&nbsp;<input name="drugid" type="text" size="4" required />&nbsp;';
+                    textshow = textshow + "&nbsp;<label>จำนวนยา</label>&nbsp;";
+                    textshow = textshow + '&nbsp;<input  name="drugIn" type="text" value="9" size="2" required /><br>';
+                }
+                //alert(textshow);
+                $("#inputSlot").append(textshow);
+      
+            }
+            function alertSlot(){
+                alert("เพิ่มสล็อตยาเสร็จสิ้น");
+            }
+        </script>
+
+    </html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>รายการนำยาเข้าตู้</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/all.css">
+        <link rel="stylesheet" href="/stylesheets/style.css">
+        <link rel="stylesheet" href="/stylesheets/navba.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        </head>
+        <style>
+            td:empty::before {content:"0"}   
+        </style>
+        <body class="adminbody">
+
+            <%- include Navbar%>
+            
+            <%- include menubar%>
+
+            <div class="content-page">
+
+                <!-- Start content -->
+                <div class="content">
+    
+                    <div class="container-fluid">
+    
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="breadcrumb-holder">
+                                    <h1 class="main-title float-left">รายการนำยาเข้าตู้</h1>
+                                    <ol class="breadcrumb float-right">
+                                        <li class="breadcrumb-item">หน้าเเรก </li>
+                                        <li class="breadcrumb-item active">รายการนำยาเข้าตู้</li>
+                                    </ol>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        
+                        <% if (messages.error) { %>
+                            <div class="alert alert-danger" role="alert"><%= messages.error %></div>
+                        <% } %>
+                        
+                        <% if (messages.success) { %>
+                            <div class="alert alert-success" role="alert"><%= messages.success %></div>
+                        <% } %>
+    
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                       
+                                        
+                                        <h3>
+                                            <i class="fa fa-history"></i> รายการนำยาเข้าตู้ยา
+                                        </h3>
+                                    </div>
+                                    <!-- end card-header -->
+    
+                                    <div class="card-body">
+                                        
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope = "col" style="width:15%;text-align: center;">รหัสยา \ รหัสตู้ยา</th>
+                                                    
+                                                        <% if(datac.length>0){ %>
+                                                            <% for(let i=0;i<datac.length;i++){ %>
+                                                                <th scope = "col" style="width:15%;text-align: center;"><%=datac[i].cupid %></th>
+                                                             <% } %>   
+                                                        <% } %>   
+                                                        <th scope = "col" style="width:15%;text-align: center;">รวมทั้งหมด</th>
+                                                        
+                                                    </tr>
+                                                    
+
+                                                </thead>
+                                                <tbody>
+                                                <%  if(data.length>0){%>
+                                                <%  if(datac.length>0){%>
+                                                <%  if(datan.length>0){%>
+                                                <%  if(datasum.length>0){%>
+                                                    <%for(let n=0;n<data.length;n++){ %>
+                                                                <tr>
+                                                                    <td scope = "col" style="width:15%;text-align: center;"><%=data[n].drugid %></td>      
+                                                                    <% for(let j=0;j<datac.length;j++){ %>    
+                                                                        <td scope = "col" style="width:15%;text-align: center;">
+                                                                        
+                                                                        <% for(let i=0;i<datan.length;i++){ %>
+                                                                          
+                                                                            <%if(datac[j].cupid==datan[i].cupid){ %>
+                                                                                <!-- (
+                                                                                <%=data[n].drugid%>/<%=datan[i].drugid %>
+                                                                                ) -->
+                                                                                <% if(data[n].drugid==datan[i].drugid){ %>
+                                                                                    <%if(datan[i].drugIn==0){%>
+                                                                                        
+                                                                                    <!-- <%= datan[i].drugid %>  
+                                                                                                         -->
+                                                                                    <% }else{ %> 
+                                                                                        <%=datan[i].drugIn%> 
+                                                                                    <% } %>                     
+                                                                                <% } %>  
+                                                                                
+                                                                            <% }else{ %>
+                                                                                 
+                                                                               
+                                                                                 
+                                                                            <% } %>
+                                                                       <% } %> 
+
+                                                                        </td> 
+                                                                        
+                                                                    <% } %>
+                                                                    <td scope = "col" style="width:15%;text-align: center;"><%=datasum[n].drugsum %></td>
+
+                                                                </tr>
+                                                    <% } %>
+                                           
+                                                <% } %>
+                                                <% } %>
+                                                <% } %>
+                                                <% } %>
+                                                </tbody>
+                                            </table>
+                                            <% if(!data.length) { %>
+                                                <p class="text-center">ไม่มีรายการนำยาเข้า!</p>
+                                            <% } %>
+                                          
+
+                                           
+                                    </div>
+                                    
+                                </div>
+    
+                            </div>    
+                        </div>
+   
+
+                        
+                    </div>
+  
+                </div>
+
+            </div>
+
+        </body>
+        <script>
+ 
+         
+        </script>
+
+    </html>

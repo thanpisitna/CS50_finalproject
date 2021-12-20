@@ -1,0 +1,51 @@
+<%  if(datan.length>0){%>
+                                                
+                                                    <%for(let n=0;n<data.length;n++){ %>
+                                                                <tr>
+                                                                    <td scope = "col" style="width:15%;text-align: center;"><%=data[n].drugid %></td>      
+                                                                    <% for(let j=0;j<datac.length;j++){ %>    
+                                                                        <td scope = "col" style="width:15%;text-align: center;">
+                                                                        
+                                                                        <% for(let i=0;i<datan.length;i++){ %>
+                                                                          
+                                                                            <%if(datac[j].cupid==datan[i].cupid){ %>
+                                                                                <!-- (
+                                                                                <%=data[n].drugid%>/<%=datan[i].drugid %>
+                                                                                ) -->
+                                                                                <% if(data[n].drugid==datan[i].drugid){ %>
+                                                                                    <%if(datan[i].drugIn==0){%>
+                                                                                        
+                                                                                    <!-- <%= datan[i].drugid %>  
+                                                                                                         -->
+                                                                                    <% }else{ %> 
+                                                                                        <%=datan[i].drugIn%> 
+                                                                                    <% } %>                     
+                                                                                <% } %>  
+                                                                                
+                                                                            <% }else{ %>
+                                                                                 
+                                                                               
+                                                                                 
+                                                                            <% } %>
+                                                                       <% } %> 
+
+                                                                        </td> 
+                                                                        
+                                                                    <% } %>
+                                                                    <td scope = "col" style="width:15%;text-align: center;"><%=datasum[n].drugsum %></td>
+
+                                                                </tr>
+                                                    <% } %>
+                                           
+                                                <% } %>
+                                                </tbody>
+
+
+
+                                                <th scope = "col" style="width:15%;text-align: center;">รหัสยา \ รหัสตู้ยา</th>
+                                                        <% if(datac.length>0){ %>
+                                                            <% for(let i=0;i<datac.length;i++){ %>
+                                                                <th scope = "col" style="width:15%;text-align: center;"><%=datac[i].cupid %></th>
+                                                             <% } %>   
+                                                        <% } %>   
+                                                        <th scope = "col" style="width:15%;text-align: center;">รวมทั้งหมด</th>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>การจัดสล็อตยา</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/all.css">
+        <link rel="stylesheet" href="/stylesheets/style.css">
+        <link rel="stylesheet" href="/stylesheets/navba.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        </head>
+
+        <body class="adminbody">
+
+            <%- include Navbar%>
+            
+            <%- include menubar%>
+
+            <div class="content-page">
+
+                <!-- Start content -->
+                <div class="content">
+    
+                    <div class="container-fluid">
+    
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="breadcrumb-holder">
+                                    <h1 class="main-title float-left">การจัดการสล็อตยา</h1>
+                                    <ol class="breadcrumb float-right">
+                                        <li class="breadcrumb-item">หน้าเเรก </li>
+                                        <li class="breadcrumb-item active">การจัดการตู้ยา</li>
+                                        <li class="breadcrumb-item active">การจัดการสล็อตยา</li>
+                                    </ol>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        
+                        <% if (messages.error) { %>
+                            <div class="alert alert-danger" role="alert"><%= messages.error %></div>
+                        <% } %>
+                        
+                        <% if (messages.success) { %>
+                            <div class="alert alert-success" role="alert"><%= messages.success %></div>
+                        <% } %>
+    
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <span class="pull-right">
+                                            <button  class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#modal_add_drug">
+                                                <i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;&nbsp;เพิ่มยา</button>
+                                        </span>
+                                        <div class="modal fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="modal_add_drug" aria-hidden="true" id="modal_add_drug">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="tab-content">
+                                                        <!--เพิ่มตู้ยา-->
+                                                       
+                                                                <!-- <div  id='modalone'> -->
+                                                                     <!-- เพิ่มตู้ยา -->
+                                                                <form action="/slot/addNumD" method="post"  >
+                
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">เพิ่มยาเข้าตู้</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                            <span class="sr-only">ปิด</span>
+                                                                        </button>
+                                                                    </div>
+                                                                
+                                                                    <div class="modal-body">
+                                                                        <input  name="cupid" value="<%=data[0].cupid%>" type="hidden" size="2"  />
+                                                                        <% for(let i = 0; i < dataS.length; i++) { %>
+                                                                        <!--elemen input-->
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+                                                                                <div class="form-group">
+                                                                                    <input  name="slotnumber" value="<%=dataS[i].slotno%>" type="hidden" size="2"  />
+                                                                                    <label>หมายเลขสล็อต <%=dataS[i].slotno%>&nbsp </label>
+                                                                                    <label>มียาอยู่ <%=dataS[i].drugnum%> จำนวนยาที่เพิ่ม</label>
+                                                                                    <input  name="drugIn" value="<%=(9-dataS[i].drugnum)%>" type="text" size="2" required />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>    
+                                                                        <% } %>        
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit"  onclick="alertdrug()" class="btn btn-primary" >เพิ่มยา</button>
+                                                                    </div>
+                                                                </form>
+                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <span class="pull-right" style="padding-left: 10px;padding-right: 10px;">
+                                            <button  class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#modal_add_slot">
+                                                <i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;&nbsp;เพิ่มสล็อต</button>
+                                        </span>
+                                        <div class="modal fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="modal_add_drug" aria-hidden="true" id="modal_add_slot">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="tab-content">
+                                                        <!--เพิ่มตู้ยา-->
+                                                       
+                                                                <!-- <div  id='modalone'> -->
+                                                                     <!-- เพิ่มสล็อต -->
+                                                                <form action="/slot/addSlotD" method="post"  >
+                
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">เพิ่มสล็อตยา</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                            <span class="sr-only">ปิด</span>
+                                                                        </button>
+                                                                    </div>
+                                                                
+                                                                    <div class="modal-body">
+                                                                        <input  name="cupid" value="<%=data[0].cupid%>" type="hidden" size="2"  />
+                                                                       
+                                                                        <!--elemen input-->
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+                                                                                <div class="form-group">
+                                                                                   <% if(dataS.length>0) { %>
+                                                                                    <input  name="slotl" value="<%=dataS[(dataS.length-1)].slotno%>" type="hidden" size="2"  />
+                                                                                   <% } %> 
+                                                                                    <label>รหัสยาที่ต้องการเพิ่ม </label>
+                                                                                    <input name="drugid" size="4">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>    
+                                                                            
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" onclick="alert('เพิ่มสล็อตเสร็จสิ้น')" class="btn btn-primary" >เพิ่มสล็อต</button>
+                                                                    </div>
+                                                                </form>
+                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h3>
+                                            <i class="fa fa-medkit"></i> รายการ <%=data[0].cupName%> ( รหัสตู้ยา : <%=data[0].cupid%> )</h3>
+                                    </div>
+                                    <!-- end card-header -->
+    
+                                    <div class="card-body">
+                                       
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope = "col" style="width:15%;text-align: center;">ลำดับ</th>
+                                                        <th scope = "col" style="width:15%;text-align: center;">หมายเลขสล็อต</th>
+                                                        <th scope = "col" style="width:15%;text-align: center;">รหัสยา</th>
+                                                        <th scope = "col" style="width:15%;text-align: center;">จำนวนยา</th>
+                                                        <th scope = "col" style="width:15%;text-align: center;">จำนวนยารอเติม</th>
+                                                        <th width = "col" style="width:15%;text-align: center;">การจัดการสล็อตยา</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% if( dataS.length){ %>    
+                                                    <% for(let i = 0; i < dataS.length; i++) { %>
+                                                        <tr>
+                                                            <th style="width:15%;text-align: center;" scope="row"><%=(i+1)%></th>
+                                                            <td style="width:15%;text-align: center;"><%=dataS[i].slotno%></td>
+                                                            <td style="width:15%;text-align: center;"><%= dataS[i].drugid %></td>
+                                                            <td style="width:15%;text-align: center;"><%= dataS[i].drugnum %></td>
+                                                            <td style="width:15%;text-align: center;"><%= dataS[i].drugIn %></td>
+                                                            <td style="width:15%;text-align: center;">
+                                                                <% if(dataS[i].drugnum>0||dataS[i].drugIn>0){ %>
+                                                                    <a onclick="alert('มียาอยู่ไม่สามารถดำเนินการเเก้ไขได้') " class="btn btn-info"><i class='fas fa-edit'></i></a>
+                                                                    <a onclick="alert('มียาอยู่ไม่สามารถดำเนินการลบได้') " class="btn btn-danger delete"><i class='fa fa-trash'></i></a>
+                                                                <% }else{ %>  
+                                                                    <button type="button" class="btn btn-info"   data-toggle="modal" data-target="#modal_editSlot<%=(i+1)%>"><i class='fas fa-edit'></i></button>
+                                                                      
+                                                                    <a  onclick="r= confirm('คุณต้องการลบสล็อตใช่หรือไม่?');if(r==true){href='/slot/deleteSlot/<%=data[0].cupid%>/<%=dataS[i].slotno%>'}" class="btn btn-danger delete"><i class='fa fa-trash'></i></a> 
+                                                                <% } %>
+                                                            </td>
+                                                        </tr>
+
+                                                            <div class="modal fade custom-modal" tabindex="-1" role="dialog" aria-labelledby="modal_editSlot" aria-hidden="true" id="modal_editSlot<%=(i+1)%>">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="tab-content">
+                                                                            <form action="/slot/editSlot" method="post"  >
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title">เเก้ไขสล็อต</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                        <span class="sr-only">ปิด</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                        <div class="row">
+                                                                                            <div class="col-lg-12">
+                                                                                                <div class="form-group">
+                                                                                                    <input  type="hidden" name="eCupid"  value="<%=data[0].cupid%>" />
+                                                                                                    <input  type="hidden" name="eSlotno"  value="<%=dataS[i].slotno%>" />
+                                                                                                    <label>หมายเลขสล็อต : <%= dataS[i].slotno %>  เปลี่ยนจาก  รหัสยา : <%= dataS[i].drugid %>  เป็น  รหัสยา : </label>
+                                                                                                    <input name="editDrugId" size="2">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>     
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="submit" onclick="alert('เเก้ไขสล็อตเสร็จสิ้น')" class="btn btn-primary" >เเก้ไขสล็อต</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div> 
+                                                                    </div>       
+                                                                </div> 
+                                                            </div>   
+                                                    <% } %>
+                                                <% } %>    
+                                                </tbody>
+                                            </table>
+                                      
+
+                                            <!-- if result is empty -->
+                                            <% if(!dataS.length) { %>
+                                                <p class="text-center">ไม่มีสล็อตยา!</p>
+                                            <% } %>
+
+                                    </div>
+                                    
+                                </div>
+    
+                            </div>    
+                        </div>
+   
+
+                        
+                    </div>
+  
+                </div>
+
+            </div>
+
+        </body>
+        <script>
+            function alertdrug(){     
+              alert("เพิ่มยาเสร็จสิ้น");
+            }
+         
+        </script>
+
+    </html>

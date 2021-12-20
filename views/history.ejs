@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>ประวัติการจัดการตู้ยา</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/all.css">
+        <link rel="stylesheet" href="/stylesheets/style.css">
+        <link rel="stylesheet" href="/stylesheets/navba.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        </head>
+
+        <body class="adminbody">
+
+            <%- include Navbar%>
+            
+            <%- include menubar%>
+
+            <div class="content-page">
+
+                <!-- Start content -->
+                <div class="content">
+    
+                    <div class="container-fluid">
+    
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="breadcrumb-holder">
+                                    <h1 class="main-title float-left">ประวัติการจัดการตู้ยา</h1>
+                                    <ol class="breadcrumb float-right">
+                                        <li class="breadcrumb-item">หน้าเเรก </li>
+                                        <li class="breadcrumb-item active">ประวัติการจัดการตู้ยา</li>
+                                    </ol>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        
+                        <% if (messages.error) { %>
+                            <div class="alert alert-danger" role="alert"><%= messages.error %></div>
+                        <% } %>
+                        
+                        <% if (messages.success) { %>
+                            <div class="alert alert-success" role="alert"><%= messages.success %></div>
+                        <% } %>
+    
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                       
+                                        
+                                        <h3>
+                                            <i class="fa fa-history"></i> รายการประวัติการจัดการตู้ยา
+                                        </h3>
+                                    </div>
+                                    <!-- end card-header -->
+    
+                                    <div class="card-body">
+                                        <% if(data.length) { %>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope = "col" style="width:15%;text-align: center;">ลำดับ</th>
+                                                        <th scope = "col" style="width:15%;text-align: center;">ผู้ใช้งาน</th>
+                                                        <th scope = "col" style="width:15%;text-align: center;">รหัสตู้ยา</th>
+                                                        <th scope = "col" style="width:15%;text-align: center;">วันที่</th>
+                                                        <th width = "col" style="width:15%;text-align: center;">  เวลา</th>
+                                                        <th width = "col" style="width:15%;text-align: center;">การดำเนินการ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for(let i = 0; i < data.length; i++) { %>
+                                                       
+                                                        <tr>
+
+                                                            <th style="width:15%;text-align: center;" scope="row"><%= i+1 %></th>
+                                                            <td style="width:15%;text-align: center;" ><%= data[i].username %></td>
+                                                            <td style="width:15%;text-align: center;"><%= data[i].cupid %></td>
+                                                            <td style="width:15%;text-align: center;"><%= data[i].actiondate %></td>
+                                                            <td style="width:15%;text-align: center;"><%= data[i].actiontime %></td>
+                                                            <% if(data[i].action==1) { %>
+                                                            <td style="width:15%;text-align: center;"> <%= "เพิ่มตู้ยา" %> </td>
+                                                            <% }else{ %>
+                                                            <td style="width:15%;text-align: center;">  <%= "นำตู้ยาออก" %> </td>
+                                                            <% } %>
+                                                           
+                                                        </tr>
+                                                    
+                                                <% } %>
+                                                    
+                                                    
+                                                </tbody>
+                                            </table>
+                                        <% } %>
+
+                                            <!-- if result is empty -->
+                                            <% if(!data.length) { %>
+                                                <p class="text-center">ไม่มีประวัติ!</p>
+                                            <% } %>
+
+                                    </div>
+                                    
+                                </div>
+    
+                            </div>    
+                        </div>
+   
+
+                        
+                    </div>
+  
+                </div>
+
+            </div>
+
+        </body>
+        <script>
+ 
+         
+        </script>
+
+    </html>

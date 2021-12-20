@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>ประวัติการจัดการสล็อตยา</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/all.css">
+        <link rel="stylesheet" href="/stylesheets/style.css">
+        <link rel="stylesheet" href="/stylesheets/navba.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        </head>
+        <style>
+            th,td{
+                width:12%;
+                text-align: center;
+            }
+        </style>
+        <body class="adminbody">
+
+            <%- include Navbar%>
+            
+            <%- include menubar%>
+
+            <div class="content-page">
+
+                <!-- Start content -->
+                <div class="content">
+    
+                    <div class="container-fluid">
+    
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="breadcrumb-holder">
+                                    <h1 class="main-title float-left">ประวัติการจัดกาสล็อตยา</h1>
+                                    <ol class="breadcrumb float-right">
+                                        <li class="breadcrumb-item">หน้าเเรก </li>
+                                        <li class="breadcrumb-item active">ประวัติการจัดการสล็อตยา</li>
+                                    </ol>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        
+                        <% if (messages.error) { %>
+                            <div class="alert alert-danger" role="alert"><%= messages.error %></div>
+                        <% } %>
+                        
+                        <% if (messages.success) { %>
+                            <div class="alert alert-success" role="alert"><%= messages.success %></div>
+                        <% } %>
+    
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                       
+                                        
+                                        <h3>
+                                            <i class="fas fa-pills"></i> รายการประวัติการจัดการสล็อตยา
+                                        </h3>
+                                    </div>
+                                    <!-- end card-header -->
+    
+                                    <div class="card-body">
+                                       
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope = "col">ลำดับ</th>
+                                                        <th scope = "col">ผู้ใช้งาน</th>
+                                                        <th scope = "col">รหัสตู้ยา</th>
+                                                        <th scope = "col">หมายเลขสล็อต</th>
+                                                        <th scope = "col">วันที่</th>
+                                                        <th width = "col">เวลา</th>
+                                                        <th width = "col" style="width:20%;">การดำเนินการ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                 <% if(dataS.length>0){ %>   
+                                                    <% for(let i = 0; i < dataS.length; i++) { %>
+                                                       
+                                                        <tr>
+
+                                                            <th scope="row"><%= i+1 %></th>
+                                                            <td><%= dataS[i].username %></td>
+                                                            <td><%= dataS[i].cupid %></td>
+                                                            <td><%= dataS[i].slotno %></td>
+                                                            <td><%= dataS[i].sdate %></td>
+                                                            <td><%= dataS[i].stime %></td>
+                                                            <% if(dataS[i].action==1) { %>
+                                                            <td> <%= "เพิ่มสล็อตยา" %> </td>
+                                                            <% }else if(dataS[i].action==2){ %>
+                                                            <td> <%= "เเก้ไข้สล็อตยา" %> </td>
+                                                            <% }else{ %>
+                                                            <td> <%= "ลบสล็อตยา" %> </td>
+                                                            <% } %>
+                                                        </tr>
+                                                    
+                                                    <% } %>
+                                                <% } %>    
+                                                    
+                                                </tbody>
+                                            </table>
+                                       
+
+                                            <!-- if result is empty -->
+                                            <% if(!dataS.length) { %>
+                                                <p class="text-center">ไม่มีประวัติ!</p>
+                                            <% } %>
+
+                                    </div>
+                                    
+                                </div>
+    
+                            </div>    
+                        </div>
+   
+
+                        
+                    </div>
+  
+                </div>
+
+            </div>
+
+        </body>
+        <script>
+ 
+         
+        </script>
+
+    </html>
